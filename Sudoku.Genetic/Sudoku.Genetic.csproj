@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GeneticSharp" Version="3.1.2" />
+  </ItemGroup>
+
 </Project>
