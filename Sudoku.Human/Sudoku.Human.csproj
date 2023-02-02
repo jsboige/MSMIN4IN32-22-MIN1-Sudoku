@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SudokuSolver">
+      <HintPath>..\Sudoku.SudokuSolver\Build\net7.0-windows\SudokuSolver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

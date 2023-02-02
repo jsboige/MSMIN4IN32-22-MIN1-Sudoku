@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Z3Solvers", "Sudoku.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Genetic", "Sudoku.Genetic\Sudoku.Genetic.csproj", "{E24E0DA9-4978-4C42-ADF1-D6201C72E6DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Human", "Sudoku.Human\Sudoku.Human.csproj", "{74034867-2F5B-4EC0-8DE8-50969FDB2A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.Human", "Sudoku.Human\Sudoku.Human.csproj", "{74034867-2F5B-4EC0-8DE8-50969FDB2A5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
