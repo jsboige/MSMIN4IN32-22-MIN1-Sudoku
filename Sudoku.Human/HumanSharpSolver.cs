@@ -10,7 +10,6 @@ public class HumanSharpSolver : ISudokuSolver
         Solver solver = new Solver(new Puzzle(s, true));
         solver.doWork();
         
-        return solver.puzzle.get();
     }
 
 }
