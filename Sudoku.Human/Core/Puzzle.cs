@@ -1,11 +1,12 @@
-﻿using Sudoku.Shared;
+﻿using Kermalis.SudokuSolver.Core;
+using Sudoku.Shared;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
-namespace Kermalis.SudokuSolver.Core;
+namespace Sudoku.Human.Core;
 
 internal sealed class Puzzle
 {
@@ -113,7 +114,7 @@ internal sealed class Puzzle
 
     public static Puzzle Load(SudokuGrid s)
     {
-        
+
         int[][] board = new int[9][];
         for (int col = 0; col < 9; col++)
         {

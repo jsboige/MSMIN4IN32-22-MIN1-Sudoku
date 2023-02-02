@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sudoku.Human.Core;
 
 namespace Kermalis.SudokuSolver.Core;
 

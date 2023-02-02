@@ -1,4 +1,5 @@
 ﻿using System;
+using Sudoku.Human.Core;
 
 namespace Kermalis.SudokuSolver.Core;
 
