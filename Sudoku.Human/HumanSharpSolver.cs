@@ -1,12 +1,16 @@
 ﻿using Sudoku.Shared;
 
-namespace Sudoku.Genetic;
+
+namespace Sudoku.Human;
 
 public class HumanSharpSolver : ISudokuSolver
 {
     public SudokuGrid Solve(SudokuGrid s)
     {
-        return s.CloneSudoku();
+        Solver solver = new Solver(new Puzzle(s, true));
+        solver.doWork();
+        
+        return solver.puzzle.get();
     }
 
 }
