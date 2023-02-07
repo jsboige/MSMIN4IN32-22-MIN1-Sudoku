@@ -17,9 +17,12 @@ public class HumanSharpSolver : ISudokuSolver
        
         Solver solver = new Solver(puzzle);
         solver.DoWork();
-        var sudokuGrid = solver.Puzzle.getBaord();
+        var sudokuGrid = solver.Puzzle.getBoard();
         
-        return new Shared.SudokuGrid() { Cells = sudokuGrid };
+        return new Shared.SudokuGrid() 
+        {
+            Cells = sudokuGrid
+        };
 
     }
 

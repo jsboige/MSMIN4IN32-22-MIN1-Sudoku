@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Sudoku.Human.Core;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Sudoku.Human.Core;
+namespace Kermalis.SudokuSolver.Core;
 
 [DebuggerDisplay("{DebugString()}", Name = "{ToString()}")]
 internal sealed class Cell
@@ -19,7 +20,7 @@ internal sealed class Cell
     public int Value { get; private set; }
     public HashSet<int> Candidates { get; }
 
-
+    public List<CellSnapshot> Snapshots { get; }
 
     public Cell(Puzzle puzzle, int value, SPoint point)
     {
@@ -30,7 +31,7 @@ internal sealed class Cell
         Point = point;
 
         Candidates = new HashSet<int>(Utils.OneToNine);
-
+        Snapshots = new List<CellSnapshot>();
 
         VisibleCells = null!; // Will be set in CalcVisibleCells
     }
@@ -115,7 +116,10 @@ internal sealed class Cell
         OriginalValue = value;
         Set(value, refreshOtherCellCandidates: true);
     }
-
+    public void CreateSnapshot(bool isCulprit, bool isSemiCulprit)
+    {
+        Snapshots.Add(new CellSnapshot(Value, Candidates, isCulprit, isSemiCulprit));
+    }
 
     public override int GetHashCode()
     {

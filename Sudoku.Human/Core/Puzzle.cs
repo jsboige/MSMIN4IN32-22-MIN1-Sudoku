@@ -121,23 +121,12 @@ internal sealed class Puzzle
             board[col] = new int[9];
         }
 
-        //for (int s. = 0; i < 9; i++)
-        //{
-        //    for (int j = 0; j < 9; j++)
-        //    {
-        //        if (int.TryParse(line[j].ToString(), out int value)) // Anything can represent Cell.EMPTY_VALUE
-        //        {
-        //            board[j][i] = value;
-        //        }
-        //    }
-        //}
-
         board = s.Cells;
 
         return new Puzzle(board, false);
     }
 
-    public int[][] getBaord()
+    public int[][] getBoard()
     {
         int[][] board = new int[9][];
         for (int col = 0; col < 9; col++)
@@ -157,4 +146,71 @@ internal sealed class Puzzle
         return board;
     }
 
+
+    public static string TechniqueFormat(string technique, string format, params object[] args)
+    {
+        return string.Format(string.Format("{0,-20}", technique) + format, args);
+    }
+
+    public void LogAction(string action)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                Cell cell = this[x, y];
+                cell.CreateSnapshot(false, false);
+            }
+        }
+        Actions.Add(action);
+    }
+    public void LogAction(string action, Cell culprit, Cell? semiCulprit)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                Cell cell = this[x, y];
+                cell.CreateSnapshot(culprit == cell, semiCulprit == cell);
+            }
+        }
+        Actions.Add(action);
+    }
+    public void LogAction(string action, IEnumerable<Cell>? culprits, Cell? semiCulprit)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                Cell cell = this[x, y];
+                cell.CreateSnapshot(culprits is not null && culprits.Contains(cell), semiCulprit == cell);
+            }
+        }
+        Actions.Add(action);
+    }
+    public void LogAction(string action, Cell culprit, IEnumerable<Cell>? semiCulprits)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                Cell cell = this[x, y];
+                cell.CreateSnapshot(culprit == cell, semiCulprits is not null && semiCulprits.Contains(cell));
+            }
+        }
+        Actions.Add(action);
+    }
+    public void LogAction(string action, IEnumerable<Cell>? culprits, IEnumerable<Cell>? semiCulprits)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                Cell cell = this[x, y];
+                cell.CreateSnapshot(culprits is not null && culprits.Contains(cell), semiCulprits is not null && semiCulprits.Contains(cell));
+            }
+        }
+        Actions.Add(action);
+    }
+}
 }
