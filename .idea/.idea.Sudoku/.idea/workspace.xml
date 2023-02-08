@@ -4,7 +4,8 @@
     <projectFile>Sudoku.Benchmark/Sudoku.Benchmark.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1283412e-55d5-4f58-b9ff-f49798f69162" name="Changes" comment="Ajout de l'héritage de classe dans la solution">
+    <list default="true" id="1283412e-55d5-4f58-b9ff-f49798f69162" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Sudoku/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Sudoku/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ColorationGraphes/ColoredGraphSolver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ColorationGraphes/ColoredGraphSolver.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sudoku.Shared/SudokuGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sudoku.Shared/SudokuGrid.cs" afterDir="false" />
     </list>
@@ -12,9 +13,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/beatr/OneDrive/Documents/GitHub/Sudoku-Coloration-de-Graphe/ColorationGraphes/ColoredGraphSolver.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -75,7 +73,8 @@
       <workItem from="1674637041528" duration="1522000" />
       <workItem from="1674639348897" duration="4811000" />
       <workItem from="1674896261221" duration="1198000" />
-      <workItem from="1674914713955" duration="341000" />
+      <workItem from="1674914713955" duration="8547000" />
+      <workItem from="1675847416395" duration="4832000" />
     </task>
     <task id="LOCAL-00001" summary="Creation of the project &quot;ColorationGraph&quot; and the dependencies">
       <created>1674640646243</created>
@@ -91,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674640935514</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Ajout de l'héritage de classe dans la solution">
+      <created>1674915083243</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1674915083243</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
