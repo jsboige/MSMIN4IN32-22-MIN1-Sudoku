@@ -1,5 +1,8 @@
+using Sudoku.Shared;
+using System;
+
 namespace Sudoku.ORTools;
-public class OREmptySolver
+public class OREmptySolver : ISudokuSolver
 {
   public SudokuGrid Solve(SudokuGrid s)
         {
