@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Sudoku.Human.Core;
 
 namespace Kermalis.SudokuSolver.Core;
 
 internal sealed partial class Solver
 {
-	private static readonly string[] _fishStr = new string[5] { string.Empty, string.Empty, "X-Wing", "Swordfish", "Jellyfish" };
-	private static readonly string[] _tupleStr = new string[5] { string.Empty, "single", "pair", "triple", "quadruple" };
-	private static readonly string[] _ordinalStr = new string[4] { string.Empty, "1st", "2nd", "3rd" };
+    private static readonly string[] _fishStr = new string[5] { string.Empty, string.Empty, "X-Wing", "Swordfish", "Jellyfish" };
+    private static readonly string[] _tupleStr = new string[5] { string.Empty, "single", "pair", "triple", "quadruple" };
+    private static readonly string[] _ordinalStr = new string[4] { string.Empty, "1st", "2nd", "3rd" };
 
     // Find X-Wing, Swordfish & Jellyfish
     private static bool FindFish(Puzzle puzzle, int amount)

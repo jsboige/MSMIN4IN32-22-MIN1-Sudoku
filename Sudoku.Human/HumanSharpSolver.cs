@@ -1,5 +1,4 @@
 ﻿using Kermalis.SudokuSolver.Core;
-using Sudoku.Human.Core;
 using Sudoku.Shared;
 
 
