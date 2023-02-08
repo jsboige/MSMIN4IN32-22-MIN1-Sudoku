@@ -2,15 +2,18 @@ using Sudoku.Shared;
 
 namespace Sudoku.Genetic;
 
+//rediriger les .extensions vers code perso
+//remplacer grille sudoku geneticsharp par grille code prof
+
 public class GeneticSharpSolver : ISudokuSolver
 {
     public SudokuGrid Solve(SudokuGrid s)
     {
         var sudokuAsString = s.ToString();
-        var sudokuSharp =  GeneticSharp.Extensions.SudokuBoard.Parse(sudokuAsString);
+        //var sudokuSharp =  GeneticSharp.Extensions.SudokuBoard.Parse(sudokuAsString); //indiquer grille sudoku code prof
         
-        var sudokuChromosome = new GeneticSharp.Extensions.SudokuCellsChromosome(sudokuSharp);
-        var fitness = new GeneticSharp.Extensions.SudokuFitness(sudokuSharp);
+        var sudokuChromosome = new SudokuCellsChromosome(s); //reindiquer
+        var fitness = new SudokuFitness(s); //reindiquer 
         var selection = new GeneticSharp.EliteSelection();
         var crossover = new GeneticSharp.UniformCrossover();
         var mutation = new GeneticSharp.UniformMutation();
@@ -32,11 +35,11 @@ public class GeneticSharpSolver : ISudokuSolver
 
         ga.Start();
 
-        var bestChromosome = ga.BestChromosome as GeneticSharp.Extensions.SudokuCellsChromosome;
+        var bestChromosome = ga.BestChromosome as SudokuCellsChromosome; //
         var bestSudoku =  bestChromosome.TargetSudokuBoard;
-        var bestSudokuAsString = bestSudoku.ToString();
-        var bestSudokuGrid = SudokuGrid.ReadSudoku(bestSudokuAsString);
-        return bestSudokuGrid;
+        //var bestSudokuAsString = bestSudoku.ToString();
+        //var bestSudokuGrid = SudokuGrid.ReadSudoku(bestSudokuAsString);
+        return bestSudoku;
     }
 
 

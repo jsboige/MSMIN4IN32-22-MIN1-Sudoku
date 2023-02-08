@@ -1,0 +1,146 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj",
+        "projectName": "Sudoku.Genetic",
+        "projectPath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj",
+        "packagesPath": "C:\\Users\\brtly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brtly\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\Sudoku.Shared.csproj": {
+                "projectPath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\Sudoku.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "GeneticSharp": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "pythonnet": {
+              "target": "Package",
+              "version": "[3.1.0-preview2023-01-03, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\Sudoku.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\Sudoku.Shared.csproj",
+        "projectName": "Sudoku.Shared",
+        "projectPath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\Sudoku.Shared.csproj",
+        "packagesPath": "C:\\Users\\brtly\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\brtly\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Python.Deployment": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "System.Runtime.Loader": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "pythonnet": {
+              "target": "Package",
+              "version": "[3.1.0-preview2023-01-03, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
