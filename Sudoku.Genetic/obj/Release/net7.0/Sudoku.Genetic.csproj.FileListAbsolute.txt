@@ -1,0 +1,15 @@
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\bin\Release\net7.0\Sudoku.Genetic.deps.json
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\bin\Release\net7.0\Sudoku.Genetic.dll
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\bin\Release\net7.0\Sudoku.Genetic.pdb
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\bin\Release\net7.0\Sudoku.Shared.dll
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\bin\Release\net7.0\Sudoku.Shared.pdb
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.csproj.AssemblyReference.cache
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.AssemblyInfoInputs.cache
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.AssemblyInfo.cs
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.csproj.CoreCompileInputs.cache
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.csproj.CopyComplete
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.dll
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\refint\Sudoku.Genetic.dll
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\Sudoku.Genetic.pdb
+C:\Users\brtly\source\repos\LydieBar\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\obj\Release\net7.0\ref\Sudoku.Genetic.dll
