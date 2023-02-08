@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sudoku.Z3Solvers {
+namespace Sudoku.ORTools {
     using System;
     using System.Reflection;
     
@@ -30,7 +30,7 @@ namespace Sudoku.Z3Solvers {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Sudoku.Z3Solvers.Resources", typeof(Resources).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Sudoku.ORTools.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -47,16 +47,12 @@ namespace Sudoku.Z3Solvers {
             }
         }
         
-        internal static string SelfCallSolver_py {
+        internal static string PythonOrtoolsSolver_Py {
             get {
-                return ResourceManager.GetString("SelfCallSolver.py", resourceCulture);
+                return ResourceManager.GetString("PythonOrtoolsSolver.py", resourceCulture);
             }
         }
         
-        internal static string Z3Solver_py {
-            get {
-                return ResourceManager.GetString("Z3Solver.py", resourceCulture);
-            }
-        }
+       
     }
 }
