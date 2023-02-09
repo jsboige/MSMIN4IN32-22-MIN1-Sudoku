@@ -1,6 +1,8 @@
+using Sudoku.Shared;
+
 namespace Sudoku.PSO;
 
-using Sudoku.Shared;
+
 
 public class PSOSolver : ISudokuSolver
 {
@@ -9,7 +11,7 @@ public class PSOSolver : ISudokuSolver
             Console.WriteLine("Begin solving Sudoku using combinatorial evolution");
             Console.WriteLine("The Sudoku is:");
 
-            var sudoku = SudokuDifficult;
+            var sudoku = Sudoku.Difficult;
             Console.WriteLine(sudoku.ToString());
 
             const int numOrganisms = 200;
