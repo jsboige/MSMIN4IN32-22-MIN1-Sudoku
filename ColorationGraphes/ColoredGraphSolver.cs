@@ -4,12 +4,12 @@ namespace ColorationGraphes;
 
 public class ColoredGraphSolver:ISudokuSolver
 {
-    public int convertIndex((int row, int column) neighbours)
+    private int ConvertIndex((int row, int column) neighbours)
     {
         return neighbours.row * 9 + neighbours.column;
     }
     
-    public (int row, int column) revertIndex(int index)
+    public (int row, int column) RevertIndex(int index)
     {
         return ((index - index % 9) / 9, index % 9);
     }
@@ -24,16 +24,16 @@ public class ColoredGraphSolver:ISudokuSolver
         {
             for (int j = 0; j < longTab; j++)
             {
-                colorAlgo.InitColoring(convertIndex((i, j)), s.Cells[i][j]);
+                colorAlgo.InitColoring(ConvertIndex((i, j)), s.Cells[i][j]);
                 
                 foreach ((int row, int column) neighbours in SudokuGrid.CellNeighbours[i][j])
                 {
-                    colorAlgo.addEdge(convertIndex((i, j)), convertIndex(neighbours));
+                    colorAlgo.AddEdge(ConvertIndex((i, j)), ConvertIndex(neighbours));
                 }
             }
         }
         
-        string sudokuSolved = colorAlgo.greedyColoring();
+        string sudokuSolved = colorAlgo.GreedyColoring();
         SudokuGrid sSolved = SudokuGrid.ReadSudoku(sudokuSolved);
 
         return sSolved;
@@ -60,7 +60,7 @@ public class ColoredGraphSolver:ISudokuSolver
     }
 
     //Function to add an edge into the graph
-    public void addEdge(int v, int w)
+    public void AddEdge(int v, int w)
     {
         adj[v].Add(w);
         adj[w].Add(v); //Graph is undirected
@@ -73,7 +73,7 @@ public class ColoredGraphSolver:ISudokuSolver
     {
         result[index] = value - 1;
     }
-    public string greedyColoring()
+    public string GreedyColoring()
     {
         // A temporary array to store the available colors. True
         // value of available[cr] would mean that the color cr is
@@ -82,7 +82,7 @@ public class ColoredGraphSolver:ISudokuSolver
         bool[] available = StoreColors();
 
         // Assign colors to remaining V-1 vertices
-        AsignColors(result, available);
+        AsignColors(available);
         
         /*
         List<ResponseModel> responseList = new List<ResponseModel>();
@@ -93,15 +93,17 @@ public class ColoredGraphSolver:ISudokuSolver
         }
         var json = new JavaScriptSerializer().Serialize(responseList);
         */
+        for (int u = 1; u < V; u++) result[u]++;
         string sudokuSolved = string.Join("", result);
-        
         return sudokuSolved;
     }
 
-    private void AsignColors(int[] result, bool[] available)
+    private void AsignColors(bool[] available)
     {
         for (int u = 1; u < V; u++)
         {
+            Console.WriteLine("\n---------------");
+            for (int k = 0; k < V; k++) Console.Write(" " + result[k]);
             // Process all adjacent vertices and flag their colors
             // as unavailable
             IEnumerator<int> it = adj[u].GetEnumerator();
@@ -113,6 +115,8 @@ public class ColoredGraphSolver:ISudokuSolver
                     available[result[i]] = true;
                 }
             }
+            Console.WriteLine("\n");
+            for (int k = 0; k < 10; k++) Console.Write(" " + available[k]);
 
             // Find the first available color
             int cr;
