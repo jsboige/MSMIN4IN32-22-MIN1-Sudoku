@@ -29,22 +29,15 @@ public class ColoredGraphSolver:ISudokuSolver
                 foreach ((int row, int column) neighbours in SudokuGrid.CellNeighbours[i][j])
                 {
                     colorAlgo.addEdge(convertIndex((i, j)), convertIndex(neighbours));
-                    colorAlgo.greedyColoring();
                 }
             }
         }
+        
+        string sudokuSolved = colorAlgo.greedyColoring();
+        SudokuGrid sSolved = SudokuGrid.ReadSudoku(sudokuSolved);
 
-
-
-
-
-
-
-
-        return s;
-
+        return sSolved;
     }
-
 }
 
  public class ColoringAlgorithm
@@ -85,10 +78,13 @@ public class ColoredGraphSolver:ISudokuSolver
         // A temporary array to store the available colors. True
         // value of available[cr] would mean that the color cr is
         // assigned to one of its adjacent vertices
+        
         bool[] available = StoreColors();
 
         // Assign colors to remaining V-1 vertices
         AsignColors(result, available);
+        
+        /*
         List<ResponseModel> responseList = new List<ResponseModel>();
         // print the result
         for (int u = 0; u < V; u++)
@@ -96,7 +92,10 @@ public class ColoredGraphSolver:ISudokuSolver
             responseList.Add(new ResponseModel(u, result[u]));
         }
         var json = new JavaScriptSerializer().Serialize(responseList);
-        return json;
+        */
+        string sudokuSolved = string.Join("", result);
+        
+        return sudokuSolved;
     }
 
     private void AsignColors(int[] result, bool[] available)
