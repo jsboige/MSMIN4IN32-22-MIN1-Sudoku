@@ -10,16 +10,16 @@ public class PSOSolver : ISudokuSolver
         {   
             int[,] output = new int[9,9];
             //s.Cells --> code pso
+            Console.Write("Sudoku be like :");
             for(int i=0; i<9; i++){
+                Console.Write("\r\n ");
                 for(int j=0; j<9; j++){
-                    output[i,j] = s.Cells[i][j];
+                    Console.Write(s.Cells[i][j].ToString());
                 }
             }
-            Console.Write("Sudoku be like :");
-            Console.Write(output.ToString());
             //resolution pso
             //s.Cells = recup tableau
             //return s;
             return s.CloneSudoku();
-        }
     }
+}
