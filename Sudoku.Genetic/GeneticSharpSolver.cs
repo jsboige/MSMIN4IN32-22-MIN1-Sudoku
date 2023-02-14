@@ -10,7 +10,7 @@ public class GeneticSharpSolver : ISudokuSolver
     public SudokuGrid Solve(SudokuGrid s)
     {
         var sudokuAsString = s.ToString();
-        //var sudokuSharp =  GeneticSharp.Extensions.SudokuBoard.Parse(sudokuAsString); //indiquer grille sudoku code prof
+        //var sudokuSharp =  GeneticSharp.Extensions.SudokuGrid.Parse(sudokuAsString); //indiquer grille sudoku code prof
         
         var sudokuChromosome = new SudokuCellsChromosome(s); //reindiquer
         var fitness = new SudokuFitness(s); //reindiquer 
@@ -41,6 +41,5 @@ public class GeneticSharpSolver : ISudokuSolver
         //var bestSudokuGrid = SudokuGrid.ReadSudoku(bestSudokuAsString);
         return bestSudoku;
     }
-
 
 }
