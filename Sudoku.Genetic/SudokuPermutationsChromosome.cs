@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GeneticSharp.Extensions
@@ -10,12 +10,10 @@ namespace GeneticSharp.Extensions
     public class SudokuPermutationsChromosome : SudokuChromosomeBase, ISudokuChromosome
     {
 
-
         /// <summary>
         /// The list of row permutations accounting for the mask
         /// </summary>
         private IList<IList<IList<int>>> _targetRowsPermutations;
-
 
         /// <summary>
         /// This constructor assumes no mask
@@ -25,21 +23,20 @@ namespace GeneticSharp.Extensions
         /// <summary>
         /// Constructor with a mask sudoku to solve, assuming a length of 9 genes
         /// </summary>
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
-        public SudokuPermutationsChromosome(SudokuBoard targetSudokuBoard) : this(targetSudokuBoard, 9) { }
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
+        public SudokuPermutationsChromosome(SudokuGrid targetSudokuGrid) : this(targetSudokuGrid, 9) { }
 
         /// <summary>
         /// Constructor with a mask and a number of genes
         /// </summary>
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="length">the number of genes</param>
-        public SudokuPermutationsChromosome(SudokuBoard targetSudokuBoard, int length) : this(targetSudokuBoard, null, length) { }
+        public SudokuPermutationsChromosome(SudokuGrid targetSudokuGrid, int length) : this(targetSudokuGrid, null, length) { }
 
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="extendedMask">The cell domains after initial constraint propagation</param>
         /// <param name="length">The number of genes for the sudoku chromosome</param>
-        public SudokuPermutationsChromosome(SudokuBoard targetSudokuBoard, Dictionary<int, List<int>> extendedMask, int length) : base(targetSudokuBoard, extendedMask, length) { }
-
+        public SudokuPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask, int length) : base(targetSudokuGrid, extendedMask, length) { }
 
         /// <summary>
         /// generates a chromosome gene from its index containing a random row permutation
@@ -58,16 +55,15 @@ namespace GeneticSharp.Extensions
 
         public override IChromosome CreateNew()
         {
-            var toReturn = new SudokuPermutationsChromosome(TargetSudokuBoard, ExtendedMask, Length);
+            var toReturn = new SudokuPermutationsChromosome(TargetSudokuGrid, ExtendedMask, Length);
             return toReturn;
         }
-
 
         /// <summary>
         /// builds a single Sudoku from the given row permutation genes
         /// </summary>
         /// <returns>a list with the single Sudoku built from the genes</returns>
-        public override IList<SudokuBoard> GetSudokus()
+        public override IList<SudokuGrid> GetSudokus()
         {
             var listInt = new List<int>(81);
             for (int i = 0; i < 9; i++)
@@ -75,10 +71,9 @@ namespace GeneticSharp.Extensions
                 var perm = GetPermutation(i);
                 listInt.AddRange(perm);
             }
-            var sudoku = new SudokuBoard(listInt);
-            return new List<SudokuBoard>(new[] { sudoku });
+            var sudoku = new SudokuGrid(listInt);
+            return new List<SudokuGrid>(new[] { sudoku });
         }
-
 
 
         /// <summary>
@@ -91,7 +86,6 @@ namespace GeneticSharp.Extensions
             int permIDx = GetPermutationIndex(rowIndex);
             return GetPermutation(rowIndex, permIDx);
         }
-
 
         /// <summary>
         /// Gets the permutation for a row and given a permutation index, according to the corresponding row's available permutations
@@ -109,7 +103,6 @@ namespace GeneticSharp.Extensions
         }
 
 
-
         /// <summary>
         /// Gets the permutation to apply from the index of the row concerned
         /// </summary>
@@ -120,30 +113,29 @@ namespace GeneticSharp.Extensions
             return (int)GetGene(rowIndex).Value;
         }
 
-
         /// <summary>
         /// This method computes for each row the list of digit permutations that respect the target mask, that is the list of valid rows discarding columns and boxes
         /// </summary>
-        /// <param name="sudokuBoard">the target sudoku to account for</param>
+        /// <param name="SudokuGrid">the target sudoku to account for</param>
         /// <returns>the list of permutations available</returns>
         public IList<IList<IList<int>>> GetRowsPermutations()
         {
-            if (TargetSudokuBoard == null)
+            if (TargetSudokuGrid == null)
             {
                 return UnfilteredPermutations;
             }
 
             // we store permutations to compute them once only for each target Sudoku
-            if (!_rowsPermutations.TryGetValue(TargetSudokuBoard, out var toReturn))
+            if (!_rowsPermutations.TryGetValue(TargetSudokuGrid, out var toReturn))
             {
                 // Since this is a static member we use a lock to prevent parallelism.
                 // This should be computed once only.
                 lock (_rowsPermutations)
                 {
-                    if (!_rowsPermutations.TryGetValue(TargetSudokuBoard, out toReturn))
+                    if (!_rowsPermutations.TryGetValue(TargetSudokuGrid, out toReturn))
                     {
                         toReturn = GetRowsPermutationsUncached();
-                        _rowsPermutations[TargetSudokuBoard] = toReturn;
+                        _rowsPermutations[TargetSudokuGrid] = toReturn;
                     }
                 }
             }
@@ -169,7 +161,6 @@ namespace GeneticSharp.Extensions
 
             return toReturn;
         }
-
 
 
         /// <summary>
@@ -232,7 +223,7 @@ namespace GeneticSharp.Extensions
         /// <summary>
         /// The list of compatible permutations for a given Sudoku is stored in a static member for fast retrieval
         /// </summary>
-        private static readonly IDictionary<SudokuBoard, IList<IList<IList<int>>>> _rowsPermutations = new Dictionary<SudokuBoard, IList<IList<IList<int>>>>();
+        private static readonly IDictionary<SudokuGrid, IList<IList<IList<int>>>> _rowsPermutations = new Dictionary<SudokuGrid, IList<IList<IList<int>>>>();
 
         /// <summary>
         /// The list of row indexes is used many times and thus stored for quicker access.
@@ -261,7 +252,6 @@ namespace GeneticSharp.Extensions
               .SelectMany(t => enumeratedList.Where(e => !t.Contains(e)),
                 (t1, t2) => (IList<T>)t1.Concat(new T[] { t2 }).ToList()).ToList();
         }
-
 
 
     }
