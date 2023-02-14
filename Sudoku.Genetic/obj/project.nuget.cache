@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "InG4QE7VDZjblCUNRpSbYVpbmgXnEiEq7meVTvqFg6umFdun6Rm2ksUUHrOjvMeXfTQqg5fyimfAibejhGsExA==",
+  "dgSpecHash": "nfPYd+ZbycjuRO7Rfy7YkN3Ahr63tBvMaZx2eMOKt6+l+0n3kFPhzTqYR5lCKprF32T/Cp1cpGy84otc2sfCyA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brtly\\source\\repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj",
+  "projectFilePath": "C:\\Users\\brtly\\Source\\Repos\\LydieBar\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.Genetic\\Sudoku.Genetic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brtly\\.nuget\\packages\\geneticsharp\\3.1.2\\geneticsharp.3.1.2.nupkg.sha512",
     "C:\\Users\\brtly\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
