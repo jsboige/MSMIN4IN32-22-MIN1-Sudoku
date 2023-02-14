@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GeneticSharp.Extensions
@@ -12,7 +12,7 @@ namespace GeneticSharp.Extensions
         /// <summary>
         /// The target sudoku board to solve
         /// </summary>
-        private readonly SudokuBoard _targetSudokuBoard;
+        private readonly SudokuGrid _targetSudokuGrid;
 
         /// <summary>
         /// The cell domains updated from the initial mask for the board to solve
@@ -22,21 +22,20 @@ namespace GeneticSharp.Extensions
         /// <summary>
         /// Constructor that accepts an additional extended mask for quick cloning
         /// </summary>
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="extendedMask">The cell domains after initial constraint propagation</param>
         /// <param name="length">The number of genes for the sudoku chromosome</param>
-        protected SudokuChromosomeBase(SudokuBoard targetSudokuBoard, Dictionary<int, List<int>> extendedMask, int length) : base(length)
+        protected SudokuChromosomeBase(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask, int length) : base(length)
         {
-            _targetSudokuBoard = targetSudokuBoard;
+            _targetSudokuGrid = targetSudokuGrid;
             _extendedMask = extendedMask;
             CreateGenes();
         }
 
-
         /// <summary>
         /// The target sudoku board to solve
         /// </summary>
-        public SudokuBoard TargetSudokuBoard => _targetSudokuBoard;
+        public SudokuGrid targetSudokuGrid => _targetSudokuGrid;
 
         /// <summary>
         /// The cell domains updated from the initial mask for the board to solve
@@ -57,14 +56,14 @@ namespace GeneticSharp.Extensions
             // We generate 1 to 9 figures for convenience
             var indices = Enumerable.Range(1, 9).ToList();
             var extendedMask = new Dictionary<int, List<int>>(81);
-            if (_targetSudokuBoard != null)
+            if (_targetSudokuGrid != null)
             {
                 //If target sudoku mask is provided, we generate an inverted mask with forbidden values by propagating rows, columns and boxes constraints
                 var forbiddenMask = new Dictionary<int, List<int>>();
                 List<int> targetList = null;
-                for (var index = 0; index < _targetSudokuBoard.Cells.Count; index++)
+                for (var index = 0; index < _targetSudokuGrid.Cells.Count; index++)
                 {
-                    var targetCell = _targetSudokuBoard.Cells[index];
+                    var targetCell = _targetSudokuGrid.Cells[index];
                     if (targetCell != 0)
                     {
                         //We parallelize going through all 3 constraint neighborhoods
@@ -99,7 +98,7 @@ namespace GeneticSharp.Extensions
                 }
 
                 // We invert the forbidden values mask to obtain the cell permitted values domains
-                for (var index = 0; index < _targetSudokuBoard.Cells.Count; index++)
+                for (var index = 0; index < _targetSudokuGrid.Cells.Count; index++)
                 {
                     extendedMask[index] = indices.Where(i => !forbiddenMask[index].Contains(i)).ToList();
                 }
@@ -116,7 +115,7 @@ namespace GeneticSharp.Extensions
             _extendedMask = extendedMask;
         }
 
-        public abstract IList<SudokuBoard> GetSudokus();
+        public abstract IList<SudokuGridudokus();
 
     }
 }
