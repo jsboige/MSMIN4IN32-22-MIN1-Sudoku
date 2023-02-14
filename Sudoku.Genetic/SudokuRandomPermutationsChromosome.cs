@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace GeneticSharp.Extensions
 {
@@ -20,7 +20,6 @@ namespace GeneticSharp.Extensions
         private readonly int _nbSudokus = 10;
 
 
-
         /// <summary>
         /// The empty constructor assumes no target mask and uses the member initializers as default.
         /// </summary>
@@ -28,22 +27,21 @@ namespace GeneticSharp.Extensions
         {
         }
 
+        /// <summary>
+        /// Constructor that takes the target Sudoku, the number of permutation genes per row, and the number of Sudokus to evaluate
+        /// </summary>
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
+        /// <param name="nbPermutations">the number of permutation genes per row</param>
+        /// <param name="nbSudokus">the number of Sudokus generated for evaluation</param>
+        public SudokuRandomPermutationsChromosome(SudokuGrid targetSudokuGrid, int nbPermutations, int nbSudokus) : this(targetSudokuGrid, null, nbPermutations, nbSudokus) { }
 
         /// <summary>
         /// Constructor that takes the target Sudoku, the number of permutation genes per row, and the number of Sudokus to evaluate
         /// </summary>
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
+        /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="nbPermutations">the number of permutation genes per row</param>
         /// <param name="nbSudokus">the number of Sudokus generated for evaluation</param>
-        public SudokuRandomPermutationsChromosome(SudokuBoard targetSudokuBoard, int nbPermutations, int nbSudokus) : this(targetSudokuBoard, null, nbPermutations, nbSudokus) { }
-
-        /// <summary>
-        /// Constructor that takes the target Sudoku, the number of permutation genes per row, and the number of Sudokus to evaluate
-        /// </summary>
-        /// <param name="targetSudokuBoard">the target sudoku to solve</param>
-        /// <param name="nbPermutations">the number of permutation genes per row</param>
-        /// <param name="nbSudokus">the number of Sudokus generated for evaluation</param>
-        public SudokuRandomPermutationsChromosome(SudokuBoard targetSudokuBoard, Dictionary<int, List<int>> extendedMask, int nbPermutations, int nbSudokus) : base(targetSudokuBoard, extendedMask, 9 * nbPermutations)
+        public SudokuRandomPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask, int nbPermutations, int nbSudokus) : base(targetSudokuGrid, extendedMask, 9 * nbPermutations)
         {
             _nbPermutations = nbPermutations;
             _nbSudokus = nbSudokus;
@@ -70,9 +68,9 @@ namespace GeneticSharp.Extensions
         /// Creates the number of Sudokus defined in the corresponding field, from the random permutations, to be evaluated.
         /// </summary>
         /// <returns>a list of Sudokus for evaluation</returns>
-        public override IList<SudokuBoard> GetSudokus()
+        public override IList<SudokuGrid> GetSudokus()
         {
-            var toReturn = new List<SudokuBoard>(_nbSudokus);
+            var toReturn = new List<SudokuGrid>(_nbSudokus);
             for (int i = 0; i < _nbSudokus; i++)
             {
                 toReturn.AddRange(base.GetSudokus());
@@ -96,7 +94,7 @@ namespace GeneticSharp.Extensions
 
         public override IChromosome CreateNew()
         {
-            return new SudokuRandomPermutationsChromosome(TargetSudokuBoard, ExtendedMask, _nbPermutations, _nbSudokus);
+            return new SudokuRandomPermutationsChromosome(TargetSudokuGrid, ExtendedMask, _nbPermutations, _nbSudokus);
         }
     }
 }
