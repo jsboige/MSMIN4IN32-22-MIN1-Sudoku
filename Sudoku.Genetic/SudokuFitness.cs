@@ -1,5 +1,3 @@
-﻿
-
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,11 +11,11 @@ namespace GeneticSharp.Extensions
         /// <summary>
         /// The target Sudoku Mask to solve.
         /// </summary>
-        private readonly SudokuBoard _targetSudokuBoard;
+        private readonly SudokuGrid _targetSudokuGrid;
 
-        public SudokuFitness(SudokuBoard targetSudokuBoard)
+        public SudokuFitness(SudokuGrid targetSudokuGrid)
         {
-            _targetSudokuBoard = targetSudokuBoard;
+            _targetSudokuGrid = targetSudokuGrid;
         }
 
         /// <summary>
@@ -52,25 +50,23 @@ namespace GeneticSharp.Extensions
         /// Evaluates a single Sudoku board by counting the duplicates in rows, boxes
         /// and the digits differing from the target mask.
         /// </summary>
-        /// <param name="testSudokuBoard">the board to evaluate</param>
+        /// <param name="testSudokuGrid">the board to evaluate</param>
         /// <returns>the number of mistakes the Sudoku contains.</returns>
         /// 
-        public double Evaluate(SudokuBoard testSudokuBoard)
+        public double Evaluate(SudokuGrid testSudokuGrid)
         {
             // We use a large lambda expression to count duplicates in rows, columns and boxes
-            var cells = testSudokuBoard.Cells.Select((c, i) => new { index = i, cell = c }).ToList();
+            var cells = testSudokuGrid.Cells.Select((c, i) => new { index = i, cell = c }).ToList();
             var toTest = cells.GroupBy(x => x.index / 9).Select(g => g.Select(c => c.cell)) // rows
               .Concat(cells.GroupBy(x => x.index % 9).Select(g => g.Select(c => c.cell))) //columns
               .Concat(cells.GroupBy(x => x.index / 27 * 27 + x.index % 9 / 3 * 3).Select(g => g.Select(c => c.cell))); //boxes
             var toReturn = -toTest.Sum(test => test.GroupBy(x => x).Select(g => g.Count() - 1).Sum()); // Summing over duplicates
-            toReturn -= cells.Count(x => _targetSudokuBoard.Cells[x.index] > 0 && _targetSudokuBoard.Cells[x.index] != x.cell); // Mask
+            toReturn -= cells.Count(x => _targetSudokuGrid.Cells[x.index] > 0 && _targetSudokuGrid.Cells[x.index] != x.cell); // Mask
             return toReturn;
         }
 
 
-
     }
-
 
 
 }
