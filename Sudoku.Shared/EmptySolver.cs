@@ -1,10 +1,7 @@
 ﻿namespace Sudoku.Shared
 {
-    public class EmptySolver : ISudokuSolver
+    public class EmptySolver 
     {
-        public SudokuGrid Solve(SudokuGrid s)
-        {
-            return s.CloneSudoku();
-        }
+        
     }
 }

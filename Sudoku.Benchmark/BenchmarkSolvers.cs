@@ -120,7 +120,7 @@ namespace Sudoku.Benchmark
     public abstract class BenchmarkSolversBase
     {
 
-        static BenchmarkSolversBase()
+        /*static BenchmarkSolversBase()
         {
 			
             _Solvers = new[] { new EmptySolver() }.Concat(Shared.SudokuGrid.GetSolvers().Select(s =>
@@ -137,7 +137,7 @@ namespace Sudoku.Benchmark
 	            
             }).Where(s => s.GetType() != typeof(EmptySolver))).Select(s => new SolverPresenter() { Solver = s }).ToList();
             //_Solvers = SudokuGrid.GetSolvers().Where(s => s.GetType().Name.ToLowerInvariant().StartsWith("dl")).Select(s => new SolverPresenter() { Solver = s });
-        }
+        }*/
 
 
         [GlobalSetup]
