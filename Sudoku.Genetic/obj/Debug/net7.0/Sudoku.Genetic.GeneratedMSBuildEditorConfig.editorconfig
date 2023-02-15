@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Sudoku.Genetic
-build_property.ProjectDir = E:\Dev\AI\Cours\TPs\EPF\2023\MSMIN4IN32-22-MIN1-Sudoku\Sudoku.Genetic\
+build_property.ProjectDir = c:\Users\Admin\OneDrive - Fondation EPF\EPF Semestre 8\IA\Projet\MSMIN4IN32-22-MIN1-Sudoku-CSP\Sudoku.Genetic\
