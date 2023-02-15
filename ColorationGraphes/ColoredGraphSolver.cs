@@ -91,11 +91,14 @@ public class ColoredGraphSolver:ISudokuSolver
         // A temporary array to store the available colors. True
         // value of available[cr] would mean that the color cr is
         // assigned to one of its adjacent vertices
-        
-        bool[] available = StoreColors();
+        int boucle = 0;
+        while(boucle < 81 && Array.IndexOf(result, -1) != -1){
+            bool[] available = StoreColors();
 
-        // Assign colors to remaining V-1 vertices
-        AsignColors(available);
+            // Assign colors to remaining V-1 vertices
+            AsignColors(available);
+            boucle++;
+        }
         
         /*
         List<ResponseModel> responseList = new List<ResponseModel>();
@@ -113,10 +116,10 @@ public class ColoredGraphSolver:ISudokuSolver
 
     private void AsignColors(bool[] available)
     {
-        for (int u = 1; u < V; u++)
+        for (int u = 0; u < V; u++)
         {
-            Console.WriteLine("\n---------------");
-            for (int k = 0; k < V; k++) Console.Write(" " + result[k]);
+            /*Console.WriteLine("\n---------------");*/
+            /* for (int k = 0; k < V; k++) Console.Write(" " + result[k]);*/
             // Process all adjacent vertices and flag their colors
             // as unavailable
             IEnumerator<int> it = adj[u].GetEnumerator();
@@ -128,21 +131,27 @@ public class ColoredGraphSolver:ISudokuSolver
                     available[result[i]] = true;
                 }
             }
-            Console.WriteLine("\n");
-            for (int k = 0; k < 10; k++) Console.Write(" " + available[k]);
+            /*Console.WriteLine("\n");
+            for (int k = 0; k < 10; k++) Console.Write(" " + available[k]);*/
 
             // Find the first available color
-            int cr;
-            for (cr = 0; cr < V; cr++)
-            {
-                if (available[cr] == false)
+            int false_amount = available.Count(cr => cr == false);
+            
+            if(false_amount==1){
+                int cr;
+                for (cr = 0; cr < V; cr++)
                 {
-                    break;
+                    if (available[cr] == false)
+                    {
+                        break;
+                    }
                 }
+                Console.WriteLine("case "+u+" mise à "+cr);
+                result[u] = cr; // Assign the found color
+            } else {
+                /*Console.WriteLine("raté : "+u+" car couleurs "+false_amount+" possibles");*/
             }
-
-            result[u] = cr; // Assign the found color
-
+                
             // Reset the values back to false for the next iteration
             it = adj[u].GetEnumerator();
             while (it.MoveNext())
@@ -158,8 +167,8 @@ public class ColoredGraphSolver:ISudokuSolver
 
     private bool[] StoreColors()
     {
-        bool[] available = new bool[V];
-        for (int cr = 0; cr < V; cr++)
+        bool[] available = new bool[9];
+        for (int cr = 0; cr < 9; cr++)
         {
             available[cr] = false;
         }
