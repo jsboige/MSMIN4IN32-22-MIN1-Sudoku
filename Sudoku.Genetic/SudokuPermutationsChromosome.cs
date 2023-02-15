@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sudoku.Shared;
 
 namespace GeneticSharp.Extensions
 {
@@ -36,7 +37,7 @@ namespace GeneticSharp.Extensions
         /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="extendedMask">The cell domains after initial constraint propagation</param>
         /// <param name="length">The number of genes for the sudoku chromosome</param>
-        public SudokuPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask, int length) : base(targetSudokuGrid, extendedMask, length) { }
+        public SudokuPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<(int row, int col), List<int>> extendedMask, int length) : base(targetSudokuGrid, extendedMask, length) { }
 
         /// <summary>
         /// generates a chromosome gene from its index containing a random row permutation
@@ -65,14 +66,14 @@ namespace GeneticSharp.Extensions
         /// <returns>a list with the single Sudoku built from the genes</returns>
         public override IList<SudokuGrid> GetSudokus()
         {
-            var listInt = new List<int>(81);
+            var listInt = new List<int[]>(81);
             for (int i = 0; i < 9; i++)
             {
-                var perm = GetPermutation(i);
-                listInt.AddRange(perm);
+                var perm = GetPermutation(i).ToArray();
+                listInt.Add(perm);
             }
-            var sudoku = new SudokuGrid(listInt);
-            return new List<SudokuGrid>(new[] { sudoku });
+			var sudoku = new SudokuGrid() { Cells = listInt.ToArray() };
+			return new List<SudokuGrid>(new[] { sudoku });
         }
 
 
@@ -151,7 +152,7 @@ namespace GeneticSharp.Extensions
                 foreach (var perm in AllPermutations)
                 {
                     // Permutation should be compatible with current row extended mask domains
-                    if (Range9.All(j => ExtendedMask[i * 9 + j].Contains(perm[j])))
+                    if (Range9.All(j => ExtendedMask[(i, j)].Contains(perm[j])))
                     {
                         tempList.Add(perm);
                     }

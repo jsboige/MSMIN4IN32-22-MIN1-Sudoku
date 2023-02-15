@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sudoku.Shared;
 
 namespace GeneticSharp.Extensions
 {
@@ -41,7 +42,7 @@ namespace GeneticSharp.Extensions
         /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="nbPermutations">the number of permutation genes per row</param>
         /// <param name="nbSudokus">the number of Sudokus generated for evaluation</param>
-        public SudokuRandomPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask, int nbPermutations, int nbSudokus) : base(targetSudokuGrid, extendedMask, 9 * nbPermutations)
+        public SudokuRandomPermutationsChromosome(SudokuGrid targetSudokuGrid, Dictionary<(int row, int col), List<int>> extendedMask, int nbPermutations, int nbSudokus) : base(targetSudokuGrid, extendedMask, 9 * nbPermutations)
         {
             _nbPermutations = nbPermutations;
             _nbSudokus = nbSudokus;

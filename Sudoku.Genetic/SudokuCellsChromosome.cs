@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sudoku.Shared;
 
 namespace GeneticSharp.Extensions
 {
@@ -26,21 +27,24 @@ namespace GeneticSharp.Extensions
         /// </summary>
         /// <param name="targetSudokuGrid">the target sudoku to solve</param>
         /// <param name="extendedMask">The cell domains after initial constraint propagation</param>
-        public SudokuCellsChromosome(SudokuGrid targetSudokuGrid, Dictionary<int, List<int>> extendedMask) : base(targetSudokuGrid, extendedMask, 81)
+        public SudokuCellsChromosome(SudokuGrid targetSudokuGrid, Dictionary<(int row, int col), List<int>> extendedMask) : base(targetSudokuGrid, extendedMask, 81)
         {
         }
 
         public override Gene GenerateGene(int geneIndex)
         {
-            //If a target mask exist and has a digit for the cell, we use it.
-            if (TargetSudokuGrid != null && TargetSudokuGrid.Cells[geneIndex] != 0)
+			var row = geneIndex / 9;
+			var col = geneIndex % 9;
+			var cellIndex = (row, col);
+			//If a target mask exist and has a digit for the cell, we use it.
+			if (TargetSudokuGrid != null && TargetSudokuGrid.Cells[row][col] != 0)
             {
-                return new Gene(TargetSudokuGrid.Cells[geneIndex]);
+                return new Gene(TargetSudokuGrid.Cells[row][col]);
             }
             // otherwise we use a random digit amongts those permitted.
             var rnd = RandomizationProvider.Current;
-            var targetIdx = rnd.GetInt(0, ExtendedMask[geneIndex].Count);
-            return new Gene(ExtendedMask[geneIndex][targetIdx]);
+            var targetIdx = rnd.GetInt(0, ExtendedMask[cellIndex].Count);
+            return new Gene(ExtendedMask[cellIndex][targetIdx]);
         }
 
         public override IChromosome CreateNew()
@@ -54,8 +58,11 @@ namespace GeneticSharp.Extensions
         /// <returns>A Sudoku board built from the 81 genes</returns>
         public override IList<SudokuGrid> GetSudokus()
         {
-            var sudoku = new SudokuGrid(GetGenes().Select(g => (int)g.Value));
-            return new List<SudokuGrid>(new[] { sudoku });
+			var genes = GetGenes();
+			var indices = Enumerable.Range(0, 9).ToList();
+			var cellGrid = indices.Select(row => indices.Select(col => (int) genes[row * 9 + col].Value).ToArray()).ToArray();
+			var sudoku = new SudokuGrid() { Cells = cellGrid };
+			return new List<SudokuGrid>(new[] { sudoku });
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sudoku.Shared;
 
 namespace GeneticSharp.Extensions
 {
@@ -55,13 +56,14 @@ namespace GeneticSharp.Extensions
         /// 
         public double Evaluate(SudokuGrid testSudokuGrid)
         {
-            // We use a large lambda expression to count duplicates in rows, columns and boxes
-            var cells = testSudokuGrid.Cells.Select((c, i) => new { index = i, cell = c }).ToList();
-            var toTest = cells.GroupBy(x => x.index / 9).Select(g => g.Select(c => c.cell)) // rows
-              .Concat(cells.GroupBy(x => x.index % 9).Select(g => g.Select(c => c.cell))) //columns
-              .Concat(cells.GroupBy(x => x.index / 27 * 27 + x.index % 9 / 3 * 3).Select(g => g.Select(c => c.cell))); //boxes
-            var toReturn = -toTest.Sum(test => test.GroupBy(x => x).Select(g => g.Count() - 1).Sum()); // Summing over duplicates
-            toReturn -= cells.Count(x => _targetSudokuGrid.Cells[x.index] > 0 && _targetSudokuGrid.Cells[x.index] != x.cell); // Mask
+			// We use a large lambda expression to count duplicates in rows, columns and boxes
+			//var cells = testSudokuGrid.Cells.Select((c, i) => new { index = i, cell = c }).ToList();
+			//var toTest = cells.GroupBy(x => x.index / 9).Select(g => g.Select(c => c.cell)) // rows
+			//  .Concat(cells.GroupBy(x => x.index % 9).Select(g => g.Select(c => c.cell))) //columns
+			//  .Concat(cells.GroupBy(x => x.index / 27 * 27 + x.index % 9 / 3 * 3).Select(g => g.Select(c => c.cell))); //boxes
+			//var toReturn = -toTest.Sum(test => test.GroupBy(x => x).Select(g => g.Count() - 1).Sum()); // Summing over duplicates
+			//toReturn -= cells.Count(x => _targetSudokuGrid.Cells[x.index] > 0 && _targetSudokuGrid.Cells[x.index] != x.cell); // Mask
+			var toReturn = - testSudokuGrid.NbErrors(_targetSudokuGrid);
             return toReturn;
         }
 

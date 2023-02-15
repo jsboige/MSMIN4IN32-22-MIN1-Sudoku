@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sudoku.Shared;
 
 namespace GeneticSharp.Extensions
 {
@@ -7,6 +8,6 @@ namespace GeneticSharp.Extensions
     /// </summary>
     public interface ISudokuChromosome
     {
-        IList<GridSudoku> GetSudokus();
+        IList<SudokuGrid> GetSudokus();
     }
 }
