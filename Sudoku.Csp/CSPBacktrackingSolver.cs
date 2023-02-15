@@ -2,24 +2,22 @@
 
 namespace Sudoku.Csp;
 
-public class SudokuSolver : ISudokuSolver
+public class CSPBacktrackingSolver : ISudokuSolver
 {
     
 
-    private SudokuGrid grid;
-
-    public SudokuSolver(SudokuGrid grid){
-        this.grid = grid;
-    }
-
+   
     public SudokuGrid Solve(SudokuGrid s)
     {
-        s = grid;
-        return s.CloneSudoku();
+        
+        var toSolve = s.CloneSudoku();
+		cspSolver(toSolve);
+		return toSolve;
     }
 
-    public bool cspSolver(){
-        Tuple<int, int> emptyCell = FindEmptyCell();
+    public bool cspSolver(SudokuGrid s)
+	{
+        Tuple<int, int> emptyCell = FindEmptyCell(s);
         if (emptyCell == null)
             return true;
 
@@ -28,27 +26,27 @@ public class SudokuSolver : ISudokuSolver
 
         for (int i = 1; i <= 9; i++)
         {
-            if (IsValidMove(row, col, i))
+            if (IsValidMove(s, row, col, i))
             {
-                grid.Cells[row][col] = i;
+                s.Cells[row][col] = i;
 
-                if (cspSolver())
+                if (cspSolver(s))
                     return true;
 
-                grid.Cells[row][col] = 0;
+                s.Cells[row][col] = 0;
             }
         }
 
         return false;
     }
     
-       private Tuple<int, int> FindEmptyCell()
+       private Tuple<int, int> FindEmptyCell(SudokuGrid s)
     {
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
             {
-                if (grid.Cells[i][j] == 0)
+                if (s.Cells[i][j] == 0)
                     return Tuple.Create(i, j);
             }
         }
@@ -56,29 +54,29 @@ public class SudokuSolver : ISudokuSolver
     }
     
 
-    private bool IsValidMove(int row, int col, int num)
+    private bool IsValidMove(SudokuGrid s, int row, int col, int num)
     {
-        return !UsedInRow(row, num) && !UsedInCol(col, num) &&
-               !UsedInSubgrid(row, col, num);
+        return !UsedInRow(s, row, num) && !UsedInCol(s, col, num) &&
+               !UsedInSubgrid(s, row, col, num);
     }
 
-    private bool UsedInRow(int row, int num)
+    private bool UsedInRow(SudokuGrid s, int row, int num)
     {
         for (int i = 0; i < 9; i++)
-            if (grid.Cells[row][i] == num)
+            if (s.Cells[row][i] == num)
                 return true;
         return false;
     }
 
-    private bool UsedInCol(int col, int num)
+    private bool UsedInCol(SudokuGrid s, int col, int num)
     {
         for (int i = 0; i < 9; i++)
-            if (grid.Cells[i][col] == num)
+            if (s.Cells[i][col] == num)
                 return true;
         return false;
     }
 
-    private bool UsedInSubgrid(int row, int col, int num)
+    private bool UsedInSubgrid(SudokuGrid s, int row, int col, int num)
     {
         int startRow = row - row % 3;
         int startCol = col - col % 3;
@@ -87,7 +85,7 @@ public class SudokuSolver : ISudokuSolver
         {
             for (int j = 0; j < 3; j++)
             {
-                if (grid.Cells[i + startRow][j + startCol] == num)
+                if (s.Cells[i + startRow][j + startCol] == num)
                     return true;
             }
         }
