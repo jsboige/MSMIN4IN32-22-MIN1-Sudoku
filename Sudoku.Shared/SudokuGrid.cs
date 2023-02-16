@@ -14,6 +14,7 @@ namespace Sudoku.Shared
 
        
         /// <summary>
+        /// The list of row indexes is used many times and thus stored for quicker access.
         /// </summary>
         public static readonly ReadOnlyCollection<int> NeighbourIndices =
             new ReadOnlyCollection<int>(Enumerable.Range(0, 9).ToList());
