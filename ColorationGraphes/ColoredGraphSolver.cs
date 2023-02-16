@@ -39,7 +39,7 @@ public class ColoredGraphSolver:ISudokuSolver
     private SudokuGrid SecondSolver(SudokuGrid s)
     {
         DSatur dSatur = new DSatur(s);
-        string sudokuSolved = dSatur.main();
+        string sudokuSolved = dSatur.initDataMatrix();
         SudokuGrid sSolved = SudokuGrid.ReadSudoku(sudokuSolved);
 
         return sSolved;
@@ -184,7 +184,10 @@ public class ColoredGraphSolver:ISudokuSolver
 class DSatur
 {
     SudokuGrid s;
-
+    LinkedList<int>[] adjacentVertices = null;
+    HashSet<int> colorSet = new HashSet<int>();
+    int color = 9;
+    bool solved = false;
     public DSatur(SudokuGrid s)
     {
         this.s = s;
@@ -248,15 +251,13 @@ class DSatur
         }
         return set;
     }
+    
+    public string initDataMatrix(){
 
-    public string main()
-    {
         int[,] dataMatrix = null;
-        LinkedList<int>[] adjacentVertices = null;
 
-        HashSet<int> colorSet = new HashSet<int>();
         for (int i = 1; i < 10; i++) colorSet.Add(i); //Ajoute les couleurs
-        int color = 9;
+
 
         #region Chargement du Graphe
 
@@ -288,15 +289,29 @@ class DSatur
         {
             dataMatrix[0, i] = adjacentVertices[i].Count;
         }
-        /*
-        int maxDeg = maxDegree(dataMatrix); //Indice du noeud de degré max
-        dataMatrix[1, maxDeg] = 1;
-        */
 
-        bool uncol = uncolored(dataMatrix); //Vrai s'il existe des noeuds non-colorés sinon faux
+        RecursiveSolve(dataMatrix, 0);
+        string sudokuSolved = "";
+        for (int i = 0; i < v; i++) sudokuSolved+= dataMatrix[1, i];
+        // Console.WriteLine("c");
+        return sudokuSolved;
+    }
+    public void RecursiveSolve(int[,] dataMatrix, int previous_index)
+    {
+            // Check if sudoku is solved
+            int zero_count = 0;
+            for (int i = 0; i < dataMatrix.GetLength(1); i++)
+            {
+                if(dataMatrix[1,i] == 0) zero_count++;
+                    
+            }
+            if(zero_count == 0){
+                solved = true;
+                Console.WriteLine("C'EST FINI");
+                return;
+            }
 
-        while (uncol)
-        {
+            // get number of unavailable colors for each index
             for (int i = 0; i < dataMatrix.GetLength(1); i++)
             {
                 if (dataMatrix[1, i] == 0)
@@ -310,66 +325,64 @@ class DSatur
                 }
             }
             
+            // Get list of unavailable colors for most restricted index
             HashSet<int> setuncoladj = setUncolAdj(dataMatrix);
             int index = -1;
-            if (setuncoladj.Count == 1)
-            {
-                index = setuncoladj.First();
-            }
-            else
-            {
-                index = setuncoladj.First();
-                int currMax = dataMatrix[0, index];
-                foreach (int id in setuncoladj)
-                {
-                    int tempMax = dataMatrix[0, id];
-                    if (tempMax > currMax)
-                    {
-                        index = id;
-                    }
-                }
-            }
+            index = setuncoladj.First();
             
-            int control = -1;
-            foreach (int col in colorSet)
+            HashSet<int> colorSetIndex = new HashSet<int>();
+            foreach (int w in adjacentVertices[index])
             {
-                int count = 0;
-                foreach (int adj in adjacentVertices[index])
-                {
-                    if (dataMatrix[1, adj] == col)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        count++;
-                    }
-                }
-                if (count == adjacentVertices[index].Count)
-                {
-                    dataMatrix[1, index] = col;
-                    control = 1;
-                    break;
+                if(dataMatrix[1, w] != 0){
+                    colorSetIndex.Add(dataMatrix[1, w]);
+                    // Console.WriteLine(index);
                 }
             }
-            if (control == -1)
-            {
-                
-                color += 1;
-                colorSet.Add(color);
-                dataMatrix[1, index] = color;
-                // TO DO
-            }
-            for (int i = 0; i < dataMatrix.GetLength(1); i++)
-            {
-                dataMatrix[2, i] = 0;
-            }
-            uncol = uncolored(dataMatrix);
-        }
 
-        string sudokuSolved = "";
-        for (int i = 0; i < v; i++) sudokuSolved+= dataMatrix[1, i];
-        return sudokuSolved;
+            // Check if there is no available colors at all
+            // Console.WriteLine("\n");
+            // Console.WriteLine("indice actuel : "+index);
+            // Console.WriteLine("indice précedent : "+previous_index);
+            // Console.WriteLine("Couleur à l'indice précédent :"+dataMatrix[1,previous_index]);
+            // Console.WriteLine("indice : "+index);
+            // Console.WriteLine("ColorCount :"+colorSetIndex.Count);
+            if(colorSetIndex.Count == 9){
+                dataMatrix[1,previous_index] = 0;
+                for (int i = 0; i < dataMatrix.GetLength(1); i++)
+                 {
+                     dataMatrix[2, i] = 0;
+                 }
+                // Console.WriteLine("\n");
+                // Console.WriteLine("Indice remis à 0 : "+previous_index);
+                // Console.WriteLine(dataMatrix[1,previous_index]);
+                // Console.WriteLine("a");
+                return;
+            } 
+            else 
+            {
+                  for(int i = 1; i < 10 ;i++){
+                      if(!colorSetIndex.Contains(i) && solved == false){
+                         dataMatrix[1,index] = i;
+                        //  Console.WriteLine("couleur :"+i);
+                          // Console.WriteLine("case changée en "+dataMatrix[1,index]);
+                          // Console.WriteLine("\n");
+                        for (int j = 0; j < dataMatrix.GetLength(1); j++)
+                        {
+                            dataMatrix[2, j] = 0;
+                        }
+                        RecursiveSolve(dataMatrix,index);
+                    }
+                    // else {Console.WriteLine("d");}
+                        
+                }
+
+                if(solved == false){
+                 dataMatrix[1,index] = 0;
+                }
+                // Console.WriteLine("e");
+            }
+
+        
     }
 
     #endregion
