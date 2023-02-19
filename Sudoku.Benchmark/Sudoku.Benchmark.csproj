@@ -16,5 +16,6 @@
     <ProjectReference Include="..\Sudoku.ORTools\Sudoku.ORTools.csproj" />
     <ProjectReference Include="..\Sudoku.BacktrackingAlgorithm\Sudoku.BacktrackingAlgorithm.csproj" />
     <ProjectReference Include="..\Sudoku.PSO\Sudoku.PSO.csproj" />
+	<ProjectReference Include="..\Sudoku.CNN\Sudoku.CNN.csproj" />
   </ItemGroup>
 </Project>
