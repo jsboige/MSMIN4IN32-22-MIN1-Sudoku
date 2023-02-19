@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.Csp", "Sudoku.Csp\Su
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.ORTools", "Sudoku.ORTools\Sudoku.ORTools.csproj", "{4E04923B-3296-4BE7-ADDE-018E7EF1C456}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku.BacktrackingAlgorithm", "Sudoku.BacktrackingAlgorithm\Sudoku.BacktrackingAlgorithm.csproj", "{6D2B9EAF-5704-4FFD-9C5F-D032A0F60EDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{4E04923B-3296-4BE7-ADDE-018E7EF1C456}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E04923B-3296-4BE7-ADDE-018E7EF1C456}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E04923B-3296-4BE7-ADDE-018E7EF1C456}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D2B9EAF-5704-4FFD-9C5F-D032A0F60EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D2B9EAF-5704-4FFD-9C5F-D032A0F60EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D2B9EAF-5704-4FFD-9C5F-D032A0F60EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D2B9EAF-5704-4FFD-9C5F-D032A0F60EDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
