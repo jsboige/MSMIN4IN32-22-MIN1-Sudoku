@@ -25,6 +25,5 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PythonScripts.resx</DependentUpon>
     </Compile>
-    <PackageReference Include="GeneticSharp.Extensions" Version="3.1.2" />
   </ItemGroup>
 </Project>

@@ -5,5 +5,4 @@
         SudokuGrid Solve(SudokuGrid s);
     }
 
-
 }
