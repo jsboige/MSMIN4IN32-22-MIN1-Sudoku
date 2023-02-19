@@ -31,6 +31,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.PSO", "Sudoku.PSO\Sudoku.PSO.csproj", "{8109105F-BC98-4FA0-858F-FF393701F5DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sudoku.CNN", "..\..\..\source\repos\Sudoku.CNN\Sudoku.CNN.csproj", "{1C76C26D-E5ED-4A0D-AD96-0A572F382728}"
+	ProjectSection(ProjectDependencies) = postProject
+		{875F71B2-99ED-4366-9C28-E5FFB5B5AA41} = {875F71B2-99ED-4366-9C28-E5FFB5B5AA41}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
