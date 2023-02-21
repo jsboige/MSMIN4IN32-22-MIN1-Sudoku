@@ -7,20 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Python.Runtime;
 using Sudoku.Shared;
-
 namespace Sudoku.ORTools
 {
-
-
-
-
     public class OrToolsPythonSolver : PythonSolverBase
     {
-
         public override Shared.SudokuGrid Solve(Shared.SudokuGrid s)
         {
             //System.Diagnostics.Debugger.Break();
-
             //For some reason, the Benchmark runner won't manage to get the mutex whereas individual execution doesn't cause issues
             //using (Py.GIL())
             //{
@@ -28,16 +21,14 @@ namespace Sudoku.ORTools
             using (PyModule scope = Py.CreateScope())
             {
 
-				var strSudoku = s.Cells.SelectMany(row => row.Select(c=> c.ToString(CultureInfo.InvariantCulture)));
+				var strSudoku = s.Cells.SelectMany(row => row.Select(c => c.ToString(CultureInfo.InvariantCulture))).Aggregate("", (current, c) => current + c);
 
 				// convert the Person object to a PyObject
 				PyObject pySudoku = strSudoku.ToPython();
-
                 // create a Python variable "person"
                 scope.Set("instance", pySudoku);
 				
 				AddNumpyConverterScript(scope);
-
                 // the person object may now be used in Python
                 string code = Resources.PythonOrtoolsSolver_Py;
                 scope.Exec(code);
@@ -48,7 +39,6 @@ namespace Sudoku.ORTools
         
             }
             //}
-
         }
         
         protected override void InitializePythonComponents()
@@ -56,8 +46,5 @@ namespace Sudoku.ORTools
             InstallPipModule("ortools");
             base.InitializePythonComponents();
         }
-
-
     }
-
     }
