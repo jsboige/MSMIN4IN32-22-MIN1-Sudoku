@@ -14,7 +14,7 @@ public abstract class GeneticSharpSolverBase : ISudokuSolver
         //var sudokuAsString = s.ToString();
         //var sudokuSharp =  GeneticSharp.Extensions.SudokuGrid.Parse(sudokuAsString); //indiquer grille sudoku code prof
 
-        var populationSize = 200;
+        var populationSize = 2000;
 		SudokuGrid toReturn = null;
 		do
         {
@@ -24,7 +24,7 @@ public abstract class GeneticSharpSolverBase : ISudokuSolver
 	        var crossover = new GeneticSharp.UniformCrossover();
 	        var mutation = new GeneticSharp.UniformMutation();
 	        var termination = new GeneticSharp.OrTermination(
-		        new GeneticSharp.GenerationNumberTermination(200),
+		        new GeneticSharp.GenerationNumberTermination(100),
 		        new GeneticSharp.FitnessThresholdTermination(0)
 	        );
 
@@ -32,7 +32,7 @@ public abstract class GeneticSharpSolverBase : ISudokuSolver
 
 	        var ga = new GeneticSharp.GeneticAlgorithm(population, fitness, selection, crossover, mutation);
 	        ga.Termination = termination;
-	        ga.MutationProbability = 0.1f;
+	        ga.MutationProbability = 0.5f;
 	        ga.CrossoverProbability = 0.9f;
 	        // ga.GenerationRan += (sender, e) =>
 	        // {
