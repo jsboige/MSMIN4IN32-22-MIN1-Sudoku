@@ -45,8 +45,8 @@ def solve_with_cp(grid: np.matrix) -> (np.matrix):
     return result
 
 solution = solve_with_cp(decode_sudoku(instance))
-r=asNetArray(solution)
-#print(r)
+
+print(solution)
 
 
 
