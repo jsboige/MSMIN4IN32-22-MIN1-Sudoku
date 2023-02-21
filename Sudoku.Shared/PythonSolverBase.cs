@@ -28,7 +28,7 @@ namespace Sudoku.Shared
 
         private static bool pythonInstalled = false;
 
-        protected static void InstallPythonComponents()
+        public static void InstallPythonComponents()
         {
 			Task task = Task.Run(() => InstallPythonComponentsAsync());
 			task.Wait();
@@ -48,7 +48,7 @@ namespace Sudoku.Shared
 				await InstallEmbedded();
             }
         }
-		protected void InstallPipModule(string moduleName, string version = "", bool force = false)
+		public static void InstallPipModule(string moduleName, string version = "", bool force = false)
 		{
 			Task task = Task.Run(() => InstallPipModuleAsync(moduleName, version, force));
 			task.Wait();
@@ -56,7 +56,7 @@ namespace Sudoku.Shared
 		}
 
 
-		protected async Task InstallPipModuleAsync(string moduleName, string version = "", bool force = false)
+		private static async Task InstallPipModuleAsync(string moduleName, string version = "", bool force = false)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
@@ -132,7 +132,7 @@ namespace Sudoku.Shared
             // };
             //
             // // install in local directory. if you don't set it will install in local app data of your user account
-            // Python.Deployment.Installer.InstallPath = Path.GetFullPath(".");
+             Python.Deployment.Installer.InstallPath = Path.GetFullPath(".");
             //
             // see what the installer is doing
 

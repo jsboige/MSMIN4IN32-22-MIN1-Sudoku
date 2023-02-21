@@ -1,16 +1,34 @@
-﻿using Keras.Applications;
+﻿using System;
+using Keras.Applications;
 using Numpy;
 using Sudoku.Shared;
 using System.Diagnostics;
+using System.IO;
 
 namespace Sudoku.CNN
 {
-    public class SolverKeras_CNN : ISudokuSolver
+    public class SolverKeras_CNN : PythonSolverBase
     {
-        public SudokuGrid Solve(SudokuGrid s)
+
+		protected override void InitializePythonComponents()
+		{
+			InstallPipModule("tensorflow");
+			InstallPipModule("keras");
+			base.InitializePythonComponents();
+		}
+
+		public override SudokuGrid Solve(SudokuGrid s)
         {
-            string filepath = "saved_model.pb";
-            Keras.Models.BaseModel model = Keras.Models.BaseModel.LoadModel(filepath);
+
+
+
+			string filepath = Path.Combine(Environment.CurrentDirectory, "saved_model.pb");
+            if (!File.Exists(filepath))
+            {
+				File.WriteAllBytes(filepath, Resource1.saved_model);
+			}
+			
+			Keras.Models.BaseModel model = Keras.Models.BaseModel.LoadModel(filepath);
             return Simple_solver(s, model);
         }
 

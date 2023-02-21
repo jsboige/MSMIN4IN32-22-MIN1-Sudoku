@@ -6,14 +6,33 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Keras.NET" Version="3.8.5" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Numpy.Bare" Version="3.8.1.25" />
-    <PackageReference Include="pythonnet_netstandard_py38_win" Version="2.5.1" />
+    <PackageReference Include="Numpy" Version="3.11.1.33" />
   </ItemGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Keras">
+      <HintPath>external\Keras.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resource1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
