@@ -4,6 +4,7 @@ using Numpy;
 using Sudoku.Shared;
 using System.Diagnostics;
 using System.IO;
+using Numpy.Models;
 
 namespace Sudoku.CNN
 {
@@ -20,10 +21,8 @@ namespace Sudoku.CNN
 		public override SudokuGrid Solve(SudokuGrid s)
         {
 
-
-
             //string filepath = Path.Combine(Environment.CurrentDirectory, "variables");
-            string filepath = "C:\\Users\\lolfi\\Documents\\GitHub\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.CNN\\New_Model.h5";
+            string filepath = "C:\\Users\\Lysandre\\Documents\\GitHub\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.CNN\\New_Model.h5";
             //if (!File.Exists(filepath))
             //{
 				//File.WriteAllBytes(filepath, Resource1.variables);
@@ -44,13 +43,15 @@ namespace Sudoku.CNN
                 {
                     SudokuBuffer[i, j] = s.Cells[i][j];
                 }
-            } 
-            
+            }
 
-            //Prediction du CNN
+            var input = np.array(SudokuBuffer);
+
             
-            var prediction = np.array(SudokuBuffer);
-            model.Predict(prediction);
+            //Prediction du CNN
+            var output = model.Predict(input.reshape(1, 9, 9, 10));
+            var probs = np.max(output, axis:2).T;
+            var valeurs = np.argmax(probs).T + 1;
             SudokuGrid sol = new SudokuGrid();
             
             //Reconversion de la solution en SudokuGrid
@@ -58,7 +59,7 @@ namespace Sudoku.CNN
             {
                 for (int j = 0; j<9; j++)
                 {
-                    sol.Cells[i][j] = (int)prediction[i][j];
+                    sol.Cells[i][j] = (int)valeurs[i][j];
                 }
             }
 

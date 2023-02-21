@@ -59,15 +59,5 @@ namespace Sudoku.CNN {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Byte[].
-        /// </summary>
-        internal static byte[] saved_model {
-            get {
-                object obj = ResourceManager.GetObject("saved_model", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
