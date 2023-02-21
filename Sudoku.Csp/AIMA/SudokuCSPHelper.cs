@@ -26,7 +26,6 @@ namespace Sudoku.CSPSolver
 
             var toReturn = GetSudokuBaseCSP();
 
-
             // Ajout des contraintes spécifiques au masque fourni
 
             //var sArray = s.getInitialSudoku();
@@ -139,26 +138,20 @@ namespace Sudoku.CSPSolver
 
                             var ligneContraintes = SudokuCSPHelper.GetAllDiffConstraints(ligneVars);
                             contraints.AddRange(ligneContraintes);
-                            //var objContrainte = new AllDiffConstraint<int>(ligneVars);
-                            //toReturn.addConstraint(objContrainte);
-
-
                         }
 
                         //colonnes
                         for (int j = 0; j < 9; j++)
                         {
                             var jClosure = j;
-                            var colVars = variables.Values.SelectMany(x => { return new Variable[] { x[jClosure] }; }).ToList();
+                            var colVars = variables.Values.SelectMany(x => { 
+                                return new Variable[] { x[jClosure] 
+                            }; }).ToList();
                             var colContraintes = SudokuCSPHelper.GetAllDiffConstraints(colVars);
                             contraints.AddRange(colContraintes);
-                            //var objContrainte = new AllDiffConstraint<int>(colVars);
-                            //                     toReturn.addConstraint(objContrainte);
-
                         }
 
                         //Boites
-
                         for (int b = 0; b < 9; b++)
                         {
                             var boiteVars = new List<Variable>();
@@ -173,9 +166,6 @@ namespace Sudoku.CSPSolver
                             }
                             var boitesContraintes = SudokuCSPHelper.GetAllDiffConstraints(boiteVars);
                             contraints.AddRange(boitesContraintes);
-
-                            //var objContrainte = new AllDiffConstraint<int>(boiteVars);
-                            //toReturn.addConstraint(objContrainte);
                         }
 
 
