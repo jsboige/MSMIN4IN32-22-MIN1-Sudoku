@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,8 +7,14 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.13.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sudoku.Genetic\Sudoku.Genetic.csproj" />
+    <ProjectReference Include="..\ColorationGraphes\ColorationGraphes.csproj" />
+    <ProjectReference Include="..\Sudoku.Human\Sudoku.Human.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
     <ProjectReference Include="..\Sudoku.Z3Solvers\Sudoku.Z3Solvers.csproj" />
+    <ProjectReference Include="..\Sudoku.Csp\Sudoku.Csp.csproj" />
     <ProjectReference Include="..\Sudoku.ORTools\Sudoku.ORTools.csproj" />
+    <ProjectReference Include="..\Sudoku.BacktrackingAlgorithm\Sudoku.BacktrackingAlgorithm.csproj" />
+    <ProjectReference Include="..\Sudoku.PSO\Sudoku.PSO.csproj" />
   </ItemGroup>
 </Project>
