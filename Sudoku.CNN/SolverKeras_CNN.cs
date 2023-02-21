@@ -22,7 +22,7 @@ namespace Sudoku.CNN
         {
 
             //string filepath = Path.Combine(Environment.CurrentDirectory, "variables");
-            string filepath = "C:\\Users\\Lysandre\\Documents\\GitHub\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.CNN\\New_Model.h5";
+            string filepath = "C:\\Users\\Lysandre\\Documents\\GitHub\\MSMIN4IN32-22-MIN1-Sudoku\\Sudoku.CNN\\sudoku.model";
             //if (!File.Exists(filepath))
             //{
 				//File.WriteAllBytes(filepath, Resource1.variables);
@@ -35,23 +35,55 @@ namespace Sudoku.CNN
         private SudokuGrid Simple_solver(SudokuGrid s, Keras.Models.BaseModel model)
         {
             //Conversion de la SudokuGrid en array Numpy pour l'injection dans le CNN
-            int[,] SudokuBuffer = new int[9,9];
-            
-            for (int i=0; i<9; i++)
+            double[,] SudokuBuffer = new double[9, 9];
+
+            for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
                     SudokuBuffer[i, j] = s.Cells[i][j];
+                    SudokuBuffer[i, j] /= 9;
+                    SudokuBuffer[i, j] -= 0.5;
                 }
             }
 
             var input = np.array(SudokuBuffer);
-
-            
-            //Prediction du CNN
-            var output = model.Predict(input.reshape(1, 9, 9, 10));
-            var probs = np.max(output, axis:2).T;
-            var valeurs = np.argmax(probs).T + 1;
+            while (true)
+            {
+                //Prediction du CNN
+                var output = model.Predict(input.reshape(1, 9, 9, 1));
+                var pred = np.argmax(output, axis: 2).reshape(9, 9) + 1;
+                Console.WriteLine(pred);
+                var proba = np.around(np.max(output, axis: new[] { 2 }).reshape(9, 9), 2);
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        input[i][j] += 0.5;
+                        input[i][j] *= 9;
+                    }
+                }
+                var mask = input.@equals(0);
+                Console.WriteLine((int)mask.sum());
+                if (((int)mask.sum()) == 0)
+                {
+                    break;
+                }
+                var probNew = proba * mask;
+                var ind = (int)np.argmax(probNew);
+                var (x, y) = ((ind / 9), ind % 9);
+                var val = pred[x][y];
+                input[x][y] = val;
+                Console.WriteLine(input.ToString());
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        input[i][j] /= 9;
+                        input[i][j] -= 0.5;
+                    }
+                }
+            }
             SudokuGrid sol = new SudokuGrid();
             
             //Reconversion de la solution en SudokuGrid
@@ -59,7 +91,7 @@ namespace Sudoku.CNN
             {
                 for (int j = 0; j<9; j++)
                 {
-                    sol.Cells[i][j] = (int)valeurs[i][j];
+                    sol.Cells[i] = input[i].astype(np.int32).GetData<int>();
                 }
             }
 
