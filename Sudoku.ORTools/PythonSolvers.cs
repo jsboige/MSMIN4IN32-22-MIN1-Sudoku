@@ -28,7 +28,7 @@ namespace Sudoku.ORTools
             using (PyModule scope = Py.CreateScope())
             {
 
-				var strSudoku = s.Cells.SelectMany(row => row.Select(c=> c.ToString(CultureInfo.InvariantCulture)));
+				var strSudoku = s.Cells.SelectMany(row => row.Select(c => c.ToString(CultureInfo.InvariantCulture))).Aggregate("", (current, c) => current + c);
 
 				// convert the Person object to a PyObject
 				PyObject pySudoku = strSudoku.ToPython();
