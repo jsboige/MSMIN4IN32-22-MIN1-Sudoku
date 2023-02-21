@@ -132,7 +132,7 @@ namespace Sudoku.Shared
             // };
             //
             // // install in local directory. if you don't set it will install in local app data of your user account
-             Python.Deployment.Installer.InstallPath = Path.GetFullPath(".");
+             //Python.Deployment.Installer.InstallPath = Path.GetFullPath(".");
             //
             // see what the installer is doing
 
