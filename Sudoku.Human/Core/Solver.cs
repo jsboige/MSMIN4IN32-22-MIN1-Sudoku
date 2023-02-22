@@ -34,6 +34,13 @@ internal sealed partial class Solver
 
 		
 	}
+
+	public bool isValid()
+	{
+		bool solved = true;
+		return !CheckForNakedSinglesOrCompletion(ref solved) && !RunTechnique();
+
+    }
 	private bool CheckForNakedSinglesOrCompletion(ref bool solved)
 	{
 		bool changed = false;
@@ -61,6 +68,7 @@ internal sealed partial class Solver
 	}
 
 	private bool RunTechnique()
+	public bool RunTechnique()
 	{
 		foreach (SolverTechnique t in _techniques)
 		{
