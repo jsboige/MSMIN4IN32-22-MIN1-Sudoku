@@ -8,4 +8,5 @@ public class OREmptySolver : ISudokuSolver
         {
             return s.CloneSudoku();
         }
+        
 }

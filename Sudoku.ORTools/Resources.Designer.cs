@@ -52,6 +52,12 @@ namespace Sudoku.ORTools {
                 return ResourceManager.GetString("PythonOrtoolsSolver.py", resourceCulture);
             }
         }
+
+        internal static string PythonOrtoolsSolverLinear_Py {
+            get {
+                return ResourceManager.GetString("PythonOrtoolsSolverLinear.py", resourceCulture);
+            }
+        }
         
        
     }
