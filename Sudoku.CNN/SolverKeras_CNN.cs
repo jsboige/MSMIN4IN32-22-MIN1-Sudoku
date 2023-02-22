@@ -52,9 +52,9 @@ namespace Sudoku.CNN
             {
                 //Prediction du CNN
                 var output = model.Predict(input.reshape(1, 9, 9, 1));
-                var pred = np.argmax(output, axis: 2).reshape(9, 9) + 1;
-                Console.WriteLine(pred);
-                var proba = np.around(np.max(output, axis: new[] { 2 }).reshape(9, 9), 2);
+                output = output.squeeze();
+                var pred = np.argmax(output, axis: 1).reshape(9, 9) + 1;
+                var proba = np.around(np.max(output, axis: new[] { 1 }).reshape(9, 9), 2);
                 for (int i = 0; i < 9; i++)
                 {
                     for (int j = 0; j < 9; j++)
@@ -64,7 +64,6 @@ namespace Sudoku.CNN
                     }
                 }
                 var mask = input.@equals(0);
-                Console.WriteLine((int)mask.sum());
                 if (((int)mask.sum()) == 0)
                 {
                     break;
