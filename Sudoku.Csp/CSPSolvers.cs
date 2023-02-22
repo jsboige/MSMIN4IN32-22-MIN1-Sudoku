@@ -20,13 +20,13 @@ namespace Sudoku.CSPSolver
       public SudokuGrid Solve(SudokuGrid s)
         {
 			//Construction du CSP en utilisant CspHelper
-
+			var objCSp =SudokuCSPHelper.GetSudokuCSP(s);
 
 			// Utilisation de la stratégie pour résoudre le CSP
-
+			var assignment = _Strategy.solve(objCSp);
 
 			//Utilisation de CSPHelper pour traduire l'assignation en SudokuGrid
-
+			SudokuCSPHelper.SetValuesFromAssignment(assignment,s);
 
 			return s;
 		}
@@ -52,6 +52,23 @@ namespace Sudoku.CSPSolver
 		}
     }
 
-	
+	//Voilà un deuxième solver. Il existe encore plein d'autres combinaisons possibles, je vous laisse le soin de proposer tous les solvers possibles de façon à en comparer les performances.
+	//Le paramètre MaxSteps concerne la stratégie MinConflicts
+	public class CSPMRVAC3Solver : CSPSolverBase
+    {
+	    protected override SolutionStrategy GetStrategy()
+	    {
+		    var objStrategyInfo = new CSPStrategyInfo
+		    {
+			    EnableLCV = false,
+			    Inference = CSPInference.AC3,
+			    Selection = CSPSelection.MRV,
+			    StrategyType = CSPStrategy.ImprovedBacktrackingStrategy,
+			    MaxSteps = 5000
+		    };
+		    return objStrategyInfo.GetStrategy();
+	    }
+    }
+
 
 }
