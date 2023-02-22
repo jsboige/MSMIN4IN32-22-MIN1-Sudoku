@@ -67,7 +67,6 @@ internal sealed partial class Solver
 		return changed;
 	}
 
-	private bool RunTechnique()
 	public bool RunTechnique()
 	{
 		foreach (SolverTechnique t in _techniques)
