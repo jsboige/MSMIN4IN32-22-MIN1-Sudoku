@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sudoku.CNN\Sudoku.CNN.csproj" />
     <ProjectReference Include="..\Sudoku.Genetic\Sudoku.Genetic.csproj" />
+
     <ProjectReference Include="..\ColorationGraphes\ColorationGraphes.csproj" />
     <ProjectReference Include="..\Sudoku.Human\Sudoku.Human.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
